@@ -39,7 +39,7 @@ void Imu_value_get(void)
 void Imu_angle_get(void)//运动情况下执行
 {
 //    IMU_Data.gyro_x=((float)imu660ra_gyro_x)/ 14.3 ;//原始值去掉了零飘以后除以转化系数变成角度制物理数据
-//    IMU_Data.gyro_y=((float)imu660ra_gyro_y)/ 14.3 ;
+    IMU_Data.gyro_y=((float)imu660ra_gyro_y)/ 16.3 ;
     IMU_Data.gyro_z=((float)imu660ra_gyro_z)/ 16.4 ;
 	
 //	  IMU_Data.gyro_x=((float)imu660rb_gyro_x)/ 14.3 ;//原始值去掉了零飘以后除以转化系数变成角度制物理数据
@@ -55,7 +55,7 @@ void Imu_angle_get(void)//运动情况下执行
 void Imu_handle_0(void)//绝对角度
 {
 
-    if(IMU_Data.gyro_z<0.3&&IMU_Data.gyro_z>-0.3)//滤波
+    if(IMU_Data.gyro_z<0.4&&IMU_Data.gyro_z>-0.4)//滤波
        {
            YAW.Yaw_1-=0;
        }
@@ -69,7 +69,7 @@ void Imu_handle_0(void)//绝对角度
 
 void Imu_handle_x(void)
 {
-				if(IMU_Data.gyro_x<0.3&&IMU_Data.gyro_x>-0.3)//滤波
+				if(IMU_Data.gyro_x<1.1&&IMU_Data.gyro_x>-1.0)//滤波
 			 {
 					 PITCH.Pitch_1+=0;
 			 }
