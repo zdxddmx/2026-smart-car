@@ -63,8 +63,8 @@ void main()
 	
     while(1)
     {
-//			NEG_motor_ctrl(5000,50);	//负压电机先启动
-//			DRV8701_D_motor_ctrl(1300,1300);//轮驱电机测试
+//			NEG_motor_ctrl(3000,50);	//负压电机先启动
+			DRV8701_D_motor_ctrl(1300,1300);//轮驱电机测试
 //			Imu_text();//IMU测试
 //			ADC_text();//ADC测试
 //			Encoder_text();

@@ -73,10 +73,10 @@ void Key_scan(void)
 
 void DRV8701_init(void)
 {
-		gpio_init(L_DIR, GPO, 1, GPO_PUSH_PULL);//L
+		gpio_init(L_DIR, GPO, 0, GPO_PUSH_PULL);//L
 		pwm_init(L_PWM,17000,0);
 	
-		gpio_init(R_DIR, GPO, 1, GPO_PUSH_PULL);//R
+		gpio_init(R_DIR, GPO, 0, GPO_PUSH_PULL);//R
 		pwm_init(R_PWM,17000,0);
 }
 
@@ -87,23 +87,23 @@ void DRV8701_D_motor_ctrl(int32 L_SPEED,int32 R_SPEED)//开环驱动函数
 
 	if(L_SPEED>0)//正转
 	{
-		gpio_set_level(L_DIR,1);
+		gpio_set_level(L_DIR,0);
 		pwm_set_duty(L_PWM,L_SPEED);
 	}
 	else//反转
 	{
-		gpio_set_level(L_DIR,0);
+		gpio_set_level(L_DIR,1);
 		pwm_set_duty(L_PWM,-L_SPEED);
 	}
 
 	if(R_SPEED>0)//正转
 	{
-		gpio_set_level(R_DIR,1);
+		gpio_set_level(R_DIR,0);
 		pwm_set_duty(R_PWM,R_SPEED);
 	}
 	else//反转
 	{
-		gpio_set_level(R_DIR,0);
+		gpio_set_level(R_DIR,1);
 		pwm_set_duty(R_PWM,-R_SPEED);
 	}
 

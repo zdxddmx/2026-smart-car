@@ -74,16 +74,16 @@ void pit_1_handler (void)
 		}
 		else
 		{
-				NEG_motor_ctrl(3000,50);	//负压电机先启动		
+//				NEG_motor_ctrl(3000,50);	//负压电机先启动		
 		}
 		
 		
 		
 
-		if(TIME_1>=400)					//2S后开始跑
-		{
-				A_navigation();//电磁导航基础控制
-		}
+//		if(TIME_1>=400)					//2S后开始跑
+//		{
+//				A_navigation();//电磁导航基础控制
+//		}
 		
 		if(top==1)//无线串口急停
 		{
