@@ -144,15 +144,15 @@ int16 Deviation_Calculate(int16 l, int16 ls, int16 rs, int16 r)
 }
 void ADC_text(void)
 {
-    ips114_show_string(0,16*0,"L_H");              ips114_show_int16(8*10,16*0,L_H);
-    ips114_show_string(0,16*1,"L_S");              ips114_show_int16(8*10,16*1,L_S);
-    ips114_show_string(0,16*2,"R_S");              ips114_show_int16(8*10,16*2,R_S);
-    ips114_show_string(0,16*3,"R_H");              ips114_show_int16(8*10,16*3,R_H);
+//	ips114_show_string(0,16*0,"L_H");              ips114_show_int16(8*10,16*0,L_H);
+//	ips114_show_string(0,16*1,"L_S");              ips114_show_int16(8*10,16*1,L_S);
+//	ips114_show_string(0,16*2,"R_S");              ips114_show_int16(8*10,16*2,R_S);
+//	ips114_show_string(0,16*3,"R_H");              ips114_show_int16(8*10,16*3,R_H);
 	
-//	  ips114_show_string(0,16*0,"L_H");              ips114_show_int32(8*10,16*0,adc_date[0],5);
-//    ips114_show_string(0,16*1,"L_S");              ips114_show_int32(8*10,16*1,adc_date[1],5);
-//    ips114_show_string(0,16*2,"R_S");              ips114_show_int32(8*10,16*2,adc_date[2],5);
-//    ips114_show_string(0,16*3,"R_H");              ips114_show_int32(8*10,16*3,adc_date[3],5);
+	ips114_show_string(0,16*0,"L_H");              ips114_show_int32(8*10,16*0,adc_date[0],5);
+	ips114_show_string(0,16*1,"L_S");              ips114_show_int32(8*10,16*1,adc_date[1],5);
+	ips114_show_string(0,16*2,"R_S");              ips114_show_int32(8*10,16*2,adc_date[2],5);
+	ips114_show_string(0,16*3,"R_H");              ips114_show_int32(8*10,16*3,adc_date[3],5);
 	
 	
     ips114_show_string(0,16*4,"T_e");              ips114_show_int32(8*10,16*4,Track_error,5);
