@@ -1,0 +1,32 @@
+# ===== Keil C251 / MDK 构建产物 =====
+**/out_file/
+**/Listings/
+**/Objects/
+*.crf
+*.iex
+*.lst
+*.obj
+*.o
+*.d
+*.sbr
+*.bak
+*.plg
+*.lnp
+*.map
+*.bin
+*.htm
+*.build_log.htm
+*.hex
+
+# ===== Keil 工程用户状态文件(因机器而异) =====
+*.uvgui.*
+*.uvopt
+*.scvd
+JLinkLog.txt
+DebugConfig/
+
+# ===== 系统/编辑器临时文件 =====
+*.tmp
+Thumbs.db
+desktop.ini
+.DS_Store
