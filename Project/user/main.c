@@ -35,7 +35,9 @@
 
 #include "zf_common_headfile.h"
 
-
+uint8 rx_byte=0;
+uint32 rx_len=0;
+uint8 top=0;
 
 void main()
 {
@@ -66,20 +68,19 @@ void main()
 //			Imu_text();//IMU测试
 //			ADC_text();//ADC测试
 //			Encoder_text();
-//	//----------
-//	rx_len = wireless_uart_read_buffer(&rx_byte, 1);
-//	if(rx_len > 0)                    // ★ 先判断:有没有收到数据?
-//	{
-//		if(rx_byte == 0x05)           // 再判断:收到了什么?
-//		{
-//			wireless_uart_send_byte(0x08);
-//			top=1;
-//			
-//		}
-//		rx_byte = 0;                  
-//		rx_len=0;
-//	}
-//	//-----------
+	//----------
+	rx_len = wireless_uart_read_buffer(&rx_byte, 1);
+	if(rx_len > 0)                    // ★ 先判断:有没有收到数据?
+	{
+		if(rx_byte == 0x05)           // 再判断:收到了什么?
+		{
+			top=1;
+			
+		}
+		rx_byte = 0;                  
+		rx_len=0;
+	}
+	//-----------
 
 			
     }
