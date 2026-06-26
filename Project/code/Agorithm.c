@@ -7,10 +7,10 @@ float place_error = 0;
 float place_last_error = 0;
 float place_out = 0;
 float place_last_out = 0;
-float place_kp = 30;  //-10  -20 10  5
-float place_kd = 14;   //10  20  25  35  45  60
+float place_kp = 5;  //-10  -20 10  5
+float place_kd =40;   //10  20  25  35  45  60
 float place_gyro_kd = 0.3;  //40  -15  -35  -50  -60
-
+//0.3
 void place_pid(int16 error)//方向外环计算pid，函数输入为小车循迹的反馈误差
 {
     float A= 0.9;//低通滤波系数,一般可以为0.9 or 0.8

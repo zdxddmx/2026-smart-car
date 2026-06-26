@@ -14,8 +14,8 @@
 #define R_DIR  			IO_P64
 #define R_PWM  			PWMA_CH4P_P66
 
-#define M_MAX				8000
-#define M_MIN				-8000
+#define M_MAX				2000
+#define M_MIN				-2000
 
 #define FY_pin			PWMB_CH3_P33
 
