@@ -68,23 +68,30 @@ void pit_1_handler (void)
 		Dir_encoder_pulse_get();//编码器数据获取
 		Read_adc();							//ADC数据获取
 		
-		if(PITCH.Pitch_1>30&&PITCH.Pitch_1<=360)//遇到桶或者墙壁负压拉到8000
+		if(PITCH.Pitch_1>25&&PITCH.Pitch_1<=360)//遇到桶或者墙壁负压拉到90%
 		{
 //				NEG_motor_ctrl(7000,50);
+//					bldc_set_speed(90);
 		}
 		else
 		{
-				NEG_motor_ctrl(3000,50);	//负压电机先启动		
+//				NEG_motor_ctrl(3000,50);	//负压电机先启动		
+//				bldc_set_speed(30);
 		}
 		
 		
 		
 
-		if(TIME_1>=400)					//2S后开始跑
-		{
-				A_navigation();//电磁导航基础控制
-		}
+//		if(TIME_1>=400)					//2S后开始跑
+//		{
+//				A_navigation();//电磁导航基础控制
+//		}
 		
+//	l_speed_pid(0,LA_SPEED);//速度为0的情况下，速度闭环测试
+//	r_speed_pid(0,RA_SPEED);
+//	DRV8701_D_motor_ctrl((int32)l_speed_out, (int32)r_speed_out);
+		
+//		
 		if(top==1)//无线串口急停
 		{
 			wireless_uart_send_byte(0x08);
@@ -92,7 +99,8 @@ void pit_1_handler (void)
 			{
 					gpio_set_level(Buzzer_pin,1);//响	
 					DRV8701_D_motor_ctrl(0,0);
-					FY_S_motor_ctrl(0);
+//					FY_S_motor_ctrl(0);
+					bldc_set_speed(0);
 
 			}
 		}

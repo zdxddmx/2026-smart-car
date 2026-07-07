@@ -73,10 +73,10 @@ void Key_scan(void)
 
 void DRV8701_init(void)
 {
-		gpio_init(L_DIR, GPO, 0, GPO_PUSH_PULL);//L
+		gpio_init(L_DIR, GPO, 1, GPO_PUSH_PULL);//L
 		pwm_init(L_PWM,17000,0);
 	
-		gpio_init(R_DIR, GPO, 0, GPO_PUSH_PULL);//R
+		gpio_init(R_DIR, GPO, 1, GPO_PUSH_PULL);//R
 		pwm_init(R_PWM,17000,0);
 }
 
@@ -87,59 +87,103 @@ void DRV8701_D_motor_ctrl(int32 L_SPEED,int32 R_SPEED)//开环驱动函数
 
 	if(L_SPEED>0)//正转
 	{
-		gpio_set_level(L_DIR,0);
+		gpio_set_level(L_DIR,1);
 		pwm_set_duty(L_PWM,L_SPEED);
 	}
 	else//反转
 	{
-		gpio_set_level(L_DIR,1);
+		gpio_set_level(L_DIR,0);
 		pwm_set_duty(L_PWM,-L_SPEED);
 	}
 
 	if(R_SPEED>0)//正转
 	{
-		gpio_set_level(R_DIR,0);
+		gpio_set_level(R_DIR,1);
 		pwm_set_duty(R_PWM,R_SPEED);
 	}
 	else//反转
 	{
-		gpio_set_level(R_DIR,1);
+		gpio_set_level(R_DIR,0);
 		pwm_set_duty(R_PWM,-R_SPEED);
 	}
 
 }
 
 //----------------------------------------------------------------负压电机
+//void FY_init(void)
+//{
+//		pwm_init(FY_pin,17000,0);
+//}
+
+//void FY_S_motor_ctrl(int SPEED)
+//{
+//		pwm_set_duty(FY_pin,SPEED);
+//}
+
+//void NEG_motor_ctrl(int32 SPEED, int32 step)
+//{
+//    static int32 cur = 0;
+
+//    if (SPEED > cur)
+//    {
+//        cur += step;
+//        if (cur > SPEED) cur = SPEED;
+//    } else if (SPEED < cur)
+//    {
+//        cur -= step;
+//        if (cur < SPEED) cur = SPEED;
+//    }
+
+//    SPEED=SPEED>MAX_DRIVE_DUTY?MAX_DRIVE_DUTY:SPEED<MIN_DRIVE_DUTY?MIN_DRIVE_DUTY:SPEED;
+
+//    pwm_set_duty(FY_pin, cur);
+//}
+
+
+//----------------------------------------------------------------无刷负压电机
+
 void FY_init(void)
 {
-		pwm_init(FY_pin,17000,0);
+	pwm_init(FY_pin,50,0);
+
+	
 }
 
-void FY_S_motor_ctrl(int SPEED)
+
+
+
+
+// @brief   设置无刷电机转速（百分比）
+// @param   percent   油门 0~100（0=停转，100=满速），超出自动钳到100
+//-------------------------------------------------------------------------------------------------------------------
+void bldc_set_speed(uint8 percent)
 {
-		pwm_set_duty(FY_pin,SPEED);
-}
+    // 计算无刷电调转速   （1ms - 2ms）/20ms * 10000（10000是PWM的满占空比时候的值）
+    // 在50Hz的控制频率下，无刷电调转速 0%   为 500
+    // 在50Hz的控制频率下，无刷电调转速 20%  为 600
+    // 在50Hz的控制频率下，无刷电调转速 40%  为 700
+    // 在50Hz的控制频率下，无刷电调转速 60%  为 800
+    // 在50Hz的控制频率下，无刷电调转速 80%  为 900
+    // 在50Hz的控制频率下，无刷电调转速 100% 为 1000
 
-void NEG_motor_ctrl(int32 SPEED, int32 step)
-{
-
-
-    static int32 cur = 0;
-
-    if (SPEED > cur)
+    if (percent > 100)
     {
-        cur += step;
-        if (cur > SPEED) cur = SPEED;
-    } else if (SPEED < cur)
-    {
-        cur -= step;
-        if (cur < SPEED) cur = SPEED;
+        percent = 100;                                 // 简单防呆
     }
-
-    SPEED=SPEED>MAX_DRIVE_DUTY?MAX_DRIVE_DUTY:SPEED<MIN_DRIVE_DUTY?MIN_DRIVE_DUTY:SPEED;
-
-    pwm_set_duty(FY_pin, cur);
+    pwm_set_duty(FY_pin, BLDC_DUTY_MIN + (uint16)percent * 5);   // 500 + percent*5
 }
+
+
+
+
+
+
+
+//----------------------------------------------------------------
+
+
+
+
 
 //----------------------------------------------------------------带方向编码器-蓝色
 

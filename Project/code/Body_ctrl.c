@@ -31,7 +31,8 @@ void Normal_run(void)//普通循迹
 		place_pid(Track_error);	//转向环闭环	
 	
 //		DRV8701_D_motor_ctrl(1500-place_out,1700+place_out);//电机开环,转向闭环
-		DRV8701_D_motor_ctrl(1000-place_out,1000+place_out);//电机开环,转向闭环
+		DRV8701_D_motor_ctrl(1500-place_out,1500+place_out);//电机开环,转向闭环
+
 }
 void Ins_run(void)//惯性循迹
 {
