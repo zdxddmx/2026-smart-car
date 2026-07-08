@@ -32,8 +32,8 @@ float l_speed_error = 0;
 float l_speed_last_error = 0;
 float l_speed_out = 0;
 float l_speed_last_out = 0;
-float l_speed_ki = 0.5f;
-float l_speed_kp = 1.0f;
+float l_speed_ki = 2;
+float l_speed_kp = 1;
 void l_speed_pid(float aim_speed,float now_speed)
 {
     float A = 0.9;//低通滤波系数,一般可以为0.9 or 0.8
@@ -50,8 +50,8 @@ float r_speed_error = 0;
 float r_speed_last_error = 0;
 float r_speed_out = 0;
 float r_speed_last_out = 0;
-float r_speed_ki = 0.5f;
-float r_speed_kp = 1.0f;
+float r_speed_ki = 2;
+float r_speed_kp = 1;
 void r_speed_pid(float aim_speed,float now_speed)
 {
     float A = 0.9;//低通滤波系数,一般可以为0.9 or 0.8

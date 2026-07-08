@@ -76,7 +76,7 @@ void pit_1_handler (void)
 		else
 		{
 //				NEG_motor_ctrl(3000,50);	//负压电机先启动		
-//				bldc_set_speed(30);
+//				bldc_set_speed(35);
 		}
 		
 		
@@ -100,7 +100,7 @@ void pit_1_handler (void)
 					gpio_set_level(Buzzer_pin,1);//响	
 					DRV8701_D_motor_ctrl(0,0);
 //					FY_S_motor_ctrl(0);
-					bldc_set_speed(0);
+//					bldc_set_speed(0);
 
 			}
 		}
