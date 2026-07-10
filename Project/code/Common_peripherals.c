@@ -110,68 +110,71 @@ void DRV8701_D_motor_ctrl(int32 L_SPEED,int32 R_SPEED)//开环驱动函数
 }
 
 //----------------------------------------------------------------负压电机
-void FY_init(void)
-{
-		pwm_init(FY_pin,17000,0);
-}
+//void FY_init(void)
+//{
+//		pwm_init(FY_pin,17000,0);
+//}
 
-void FY_S_motor_ctrl(int SPEED)
-{
-		pwm_set_duty(FY_pin,SPEED);
-}
+//void FY_S_motor_ctrl(int SPEED)
+//{
+//		pwm_set_duty(FY_pin,SPEED);
+//}
 
-void NEG_motor_ctrl(int32 SPEED, int32 step)
-{
-    static int32 cur = 0;
+//void NEG_motor_ctrl(int32 SPEED, int32 step)
+//{
 
-    if (SPEED > cur)
-    {
-        cur += step;
-        if (cur > SPEED) cur = SPEED;
-    } else if (SPEED < cur)
-    {
-        cur -= step;
-        if (cur < SPEED) cur = SPEED;
-    }
 
-    SPEED=SPEED>MAX_DRIVE_DUTY?MAX_DRIVE_DUTY:SPEED<MIN_DRIVE_DUTY?MIN_DRIVE_DUTY:SPEED;
+//    static int32 cur = 0;
 
-    pwm_set_duty(FY_pin, cur);
-}
+//    if (SPEED > cur)
+//    {
+//        cur += step;
+//        if (cur > SPEED) cur = SPEED;
+//    } else if (SPEED < cur)
+//    {
+//        cur -= step;
+//        if (cur < SPEED) cur = SPEED;
+//    }
+
+//    SPEED=SPEED>MAX_DRIVE_DUTY?MAX_DRIVE_DUTY:SPEED<MIN_DRIVE_DUTY?MIN_DRIVE_DUTY:SPEED;
+
+//    pwm_set_duty(FY_pin, cur);
+//}
+
 
 
 //----------------------------------------------------------------无刷负压电机
 
-//void FY_init(void)
-//{
-//	pwm_init(FY_pin,50,0);
+void FY_init(void)
+{
+	pwm_init(FY_pin,50,0);
 
-//	
-//}
-
-
+	
+}
 
 
 
-//// @brief   设置无刷电机转速（百分比）
-//// @param   percent   油门 0~100（0=停转，100=满速），超出自动钳到100
-////-------------------------------------------------------------------------------------------------------------------
-//void bldc_set_speed(uint8 percent)
-//{
-//    // 计算无刷电调转速   （1ms - 2ms）/20ms * 10000（10000是PWM的满占空比时候的值）
-//    // 在50Hz的控制频率下，无刷电调转速 0%   为 500
-//    // 在50Hz的控制频率下，无刷电调转速 20%  为 600
-//    // 在50Hz的控制频率下，无刷电调转速 40%  为 700
-//    // 在50Hz的控制频率下，无刷电调转速 60%  为 800
-//    // 在50Hz的控制频率下，无刷电调转速 80%  为 900
-//    // 在50Hz的控制频率下，无刷电调转速 100% 为 1000
 
-//    if (percent > 100)
-//    {
-//        percent = 100;                                 // 简单防呆
-//    }
-//    pwm_set_duty(FY_pin, BLDC_DUTY_MIN + (uint16)percent * 5);   // 500 + percent*5
-//}
+
+// @brief   设置无刷电机转速（百分比）
+// @param   percent   油门 0~100（0=停转，100=满速），超出自动钳到100
+//-------------------------------------------------------------------------------------------------------------------
+void bldc_set_speed(uint8 percent)
+{
+    // 计算无刷电调转速   （1ms - 2ms）/20ms * 10000（10000是PWM的满占空比时候的值）
+    // 在50Hz的控制频率下，无刷电调转速 0%   为 500
+    // 在50Hz的控制频率下，无刷电调转速 20%  为 600
+    // 在50Hz的控制频率下，无刷电调转速 40%  为 700
+    // 在50Hz的控制频率下，无刷电调转速 60%  为 800
+    // 在50Hz的控制频率下，无刷电调转速 80%  为 900
+    // 在50Hz的控制频率下，无刷电调转速 100% 为 1000
+
+    if (percent > 100)
+    {
+        percent = 100;                                 // 简单防呆
+    }
+    pwm_set_duty(FY_pin, BLDC_DUTY_MIN + (uint16)percent * 5);   // 500 + percent*5
+}
 
 
 

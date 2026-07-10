@@ -100,7 +100,7 @@ void pit_1_handler (void)
 					gpio_set_level(Buzzer_pin,1);//Ïì	
 					DRV8701_D_motor_ctrl(0,0);
 //					FY_S_motor_ctrl(0);
-//					bldc_set_speed(0);
+					bldc_set_speed(0);
 
 			}
 		}

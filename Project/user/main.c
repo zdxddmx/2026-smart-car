@@ -46,17 +46,17 @@ void main()
 	
 	// 此处编写用户代码 例如外设初始化代码等
 	
-//	Buzzer_init();				//蜂鸣器初始化
-//	Key_init();						//按键初始化
-//	ips114_init();				//显示屏初始化
-//	adv_init();						//ADC初始化
-//	DRV8701_init();				//轮驱电机初始化
+	Buzzer_init();				//蜂鸣器初始化
+	Key_init();						//按键初始化
+	ips114_init();				//显示屏初始化
+	adv_init();						//ADC初始化
+	DRV8701_init();				//轮驱电机初始化
 	FY_init();						//负压电机初始化
-//	Dir_encoder_init();		//带方向编码器初始化
-//	Imu_init();						//陀螺仪初始化
-//	wireless_uart_init();
+	Dir_encoder_init();		//带方向编码器初始化
+	Imu_init();						//陀螺仪初始化
+	wireless_uart_init();
 	
-//	pit_1_ms_init(5);
+	pit_1_ms_init(5);
 	
 	
 	Buzzer_check(50);																			//自检
@@ -64,23 +64,23 @@ void main()
     while(1)
     {
 //		bldc_set_speed(30);//无刷负压电机先启动
-			NEG_motor_ctrl(7000,5);	//负压电机先启动
+//			NEG_motor_ctrl(7000,5);	//负压电机先启动
 //			DRV8701_D_motor_ctrl(1500,1500);//轮驱电机测试
 //			Imu_text();//IMU测试
 //			ADC_text();//ADC测试
 //			Encoder_text();
 	//----------
-//	rx_len = wireless_uart_read_buffer(&rx_byte, 1);
-//	if(rx_len > 0)                    // ★ 先判断:有没有收到数据?
-//	{
-//		if(rx_byte == 0x05)           // 再判断:收到了什么?
-//		{
-//			top=1;
-//			
-//		}
-//		rx_byte = 0;                  
-//		rx_len=0;
-//	}
+	rx_len = wireless_uart_read_buffer(&rx_byte, 1);
+	if(rx_len > 0)                    // ★ 先判断:有没有收到数据?
+	{
+		if(rx_byte == 0x05)           // 再判断:收到了什么?
+		{
+			top=1;
+			
+		}
+		rx_byte = 0;                  
+		rx_len=0;
+	}
 	//-----------
 
 			
