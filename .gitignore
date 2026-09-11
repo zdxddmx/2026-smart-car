@@ -1,0 +1,23 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# editors / os
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# eda output
+*_gerber/
+*.zip
