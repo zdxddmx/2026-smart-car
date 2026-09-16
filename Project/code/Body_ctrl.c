@@ -2,13 +2,13 @@
 
 int HD_flag=0;
 int HD_TIME=0;
-int Island_chamfer=0;//»·µºÇĞ½Ç
+int Island_chamfer=0;//ç¯å²›åˆ‡è§’
 
 
-void A_navigation(void)//µç´Åµ¼º½
+void A_navigation(void)//ç”µç£å¯¼èˆª
 {
-		State_scan();//×´Ì¬É¨Ãè
-		State_execution();//×´Ì¬Ö´ĞĞ
+		State_scan();//çŠ¶æ€æ‰«æ
+		State_execution();//çŠ¶æ€æ‰§è¡Œ
 }
 
 
@@ -17,7 +17,7 @@ void A_navigation(void)//µç´Åµ¼º½
 
 
 
-void Normal_run(void)//ÆÕÍ¨Ñ­¼£
+void Normal_run(void)//æ™®é€šå¾ªè¿¹
 {
 		static float last_gyro_z = 0.0f;
 		imu660ra_gyro_z=LowPassFilter(imu660ra_gyro_z, last_gyro_z, 0.1f);
@@ -28,56 +28,56 @@ void Normal_run(void)//ÆÕÍ¨Ñ­¼£
 //		last_gyro_z=imu660rb_gyro_z;
 	
 	
-		place_pid(Track_error);	//×ªÏò»·±Õ»·	
+		place_pid(Track_error);	//è½¬å‘ç¯é—­ç¯	
 	
-//		DRV8701_D_motor_ctrl(1500-place_out,1700+place_out);//µç»ú¿ª»·,×ªÏò±Õ»·
-		DRV8701_D_motor_ctrl(1500-place_out,1500+place_out);//µç»ú¿ª»·,×ªÏò±Õ»·
+//		DRV8701_D_motor_ctrl(1500-place_out,1700+place_out);//ç”µæœºå¼€ç¯,è½¬å‘é—­ç¯
+		DRV8701_D_motor_ctrl(1500-place_out,1500+place_out);//ç”µæœºå¼€ç¯,è½¬å‘é—­ç¯
 
 }
-void Ins_run(void)//¹ßĞÔÑ­¼£
+void Ins_run(void)//æƒ¯æ€§å¾ªè¿¹
 {
-		DRV8701_D_motor_ctrl(1400-(Island_chamfer-YAW.Yaw_1)*35,1400+(Island_chamfer-YAW.Yaw_1)*35);//ÕâÀïµÄÏµÊı20¾ö¶¨×ÅÈë»·µºµÄÊ±»ú,ËÙ¶ÈÔ½¿ì,Õâ¸öÖµÒªÊÊµ±±ä´ó
+		DRV8701_D_motor_ctrl(1400-(Island_chamfer-YAW.Yaw_1)*35,1400+(Island_chamfer-YAW.Yaw_1)*35);//è¿™é‡Œçš„ç³»æ•°20å†³å®šç€å…¥ç¯å²›çš„æ—¶æœº,é€Ÿåº¦è¶Šå¿«,è¿™ä¸ªå€¼è¦é€‚å½“å˜å¤§
 }
 
-void Roundabout_Prepare(void)//´ıÈë»·µº£¬´ËÊ±Àë×î¼ÑÈë»·µºµã»¹ÓĞ´ó¸Å25CM
+void Roundabout_Prepare(void)//å¾…å…¥ç¯å²›ï¼Œæ­¤æ—¶ç¦»æœ€ä½³å…¥ç¯å²›ç‚¹è¿˜æœ‰å¤§æ¦‚25CM
 {
-		gpio_set_level(Buzzer_pin,1);//Ïì	
-		Normal_run();//Î¬³ÖÆÕÍ¨Ñ­¼£
+		gpio_set_level(Buzzer_pin,1);//å“	
+		Normal_run();//ç»´æŒæ™®é€šå¾ªè¿¹
 }
 
-void Roundabout_inprogress(void)//Ö´ĞĞ»·µº×ªÏò,Õâ¸ö¶¯×÷ÊÇÕû¸ö»·µºÖĞ×îÖØÒªµÄÒ»²½,ÊÇÇ¿ĞĞÈÃ³µÍÑÀëµç´ÅÏßÒıµ¼,Õı³£µÄÈüµÀ³µÊÇ²»»á×ÔÈ»Èë»·µºµÄ
+void Roundabout_inprogress(void)//æ‰§è¡Œç¯å²›è½¬å‘,è¿™ä¸ªåŠ¨ä½œæ˜¯æ•´ä¸ªç¯å²›ä¸­æœ€é‡è¦çš„ä¸€æ­¥,æ˜¯å¼ºè¡Œè®©è½¦è„±ç¦»ç”µç£çº¿å¼•å¯¼,æ­£å¸¸çš„èµ›é“è½¦æ˜¯ä¸ä¼šè‡ªç„¶å…¥ç¯å²›çš„
 {
-		Ins_run();//¹ßĞÔµ¼º½
+		Ins_run();//æƒ¯æ€§å¯¼èˆª
 }
 
 
-int Running_status;//×´Ì¬±êÖ¾Î»
+int Running_status;//çŠ¶æ€æ ‡å¿—ä½
 
-void State_scan(void)//×´Ì¬É¨Ãè
+void State_scan(void)//çŠ¶æ€æ‰«æ
 {
 
 		
-		if(R_ALL>L_ALL&&ALL_DG>=210)//¼ì²âµ½ÓÒ»·µº,µ«Àë×î¼ÑÈë»·µºµã»¹ÓĞµã¾àÀë
+		if(R_ALL>L_ALL&&ALL_DG>=210)//æ£€æµ‹åˆ°å³ç¯å²›,ä½†ç¦»æœ€ä½³å…¥ç¯å²›ç‚¹è¿˜æœ‰ç‚¹è·ç¦»
 		{
-				HD_flag=1;	//¿ªÆô¾àÀë»ı·Ö
-			  Island_chamfer=-20;//×ó»·µºÇĞ½Ç
+				HD_flag=1;	//å¼€å¯è·ç¦»ç§¯åˆ†
+			  Island_chamfer=-20;//å·¦ç¯å²›åˆ‡è§’
 				Running_status=S_R_CIRC_PRE;
 
 		}
-		else if(L_ALL>R_ALL&&ALL_DG>=230)//¼ì²âµ½×ó»·µº,µ«Àë×î¼ÑÈë»·µºµã»¹ÓĞµã¾àÀë
+		else if(L_ALL>R_ALL&&ALL_DG>=230)//æ£€æµ‹åˆ°å·¦ç¯å²›,ä½†ç¦»æœ€ä½³å…¥ç¯å²›ç‚¹è¿˜æœ‰ç‚¹è·ç¦»
 		{
-				HD_flag=1;	//¿ªÆô¾àÀë»ı·Ö
-				Island_chamfer=30;//ÓÒ»·µºÇĞ½Ç
+				HD_flag=1;	//å¼€å¯è·ç¦»ç§¯åˆ†
+				Island_chamfer=30;//å³ç¯å²›åˆ‡è§’
 				Running_status=S_L_CIRC_PRE;
 		
 		}
-		else if(Distance>=15558)//µ½´ï×î¼Ñ»·µºµã-²¢¿ªÊ¼×ªÏò			//		25CM-15558
+		else if(Distance>=15558)//åˆ°è¾¾æœ€ä½³ç¯å²›ç‚¹-å¹¶å¼€å§‹è½¬å‘			//		25CM-15558
 		{	 
-				Imu_open_flag=1;//¿ªÆô½Ç¶È»ı·Ö
-				HD_flag=0;//¹Ø±Õ¾àÀë»ı·Ö
-				Distance=0;//¾àÀëÇå0
+				Imu_open_flag=1;//å¼€å¯è§’åº¦ç§¯åˆ†
+				HD_flag=0;//å…³é—­è·ç¦»ç§¯åˆ†
+				Distance=0;//è·ç¦»æ¸…0
 			
-				if(Island_chamfer==-20)//¸ù¾İÇĞ½Ç×ÔĞĞÅĞ¶Ï»·µºÖ´ĞĞ
+				if(Island_chamfer==-20)//æ ¹æ®åˆ‡è§’è‡ªè¡Œåˆ¤æ–­ç¯å²›æ‰§è¡Œ
 				{
 						Running_status=S_R_CIRC_JIN;	
 				}
@@ -87,46 +87,46 @@ void State_scan(void)//×´Ì¬É¨Ãè
 				}
 						
 		}
-		else if(func_abs(YAW.Yaw_1)>=func_abs(Island_chamfer))//³¬¹ıÄ¿±ê½Ç¶È¹Ø±Õ¹ßĞÔµ¼º½²¢Çå0¶ÔÓÚ±êÖ¾Î»,ÕâÀïĞ´³É¾ø¶ÔÖµÊÇÒòÎª×ó»·µººÍÓÒ»·µºµÄÇĞ½Ç²»Ò»Ñù,ÕâÑùÄÜÇÉÃîµÄ×ÔÊÊÓ¦£¬·´Õı¾ÍÊÇÆ«³öÈ¥µÄ½Ç´óÓÚÄ¿±êÇĞ½Ç¾Í½áÊøÕâ¸ö×´Ì¬
+		else if(func_abs(YAW.Yaw_1)>=func_abs(Island_chamfer))//è¶…è¿‡ç›®æ ‡è§’åº¦å…³é—­æƒ¯æ€§å¯¼èˆªå¹¶æ¸…0å¯¹äºæ ‡å¿—ä½,è¿™é‡Œå†™æˆç»å¯¹å€¼æ˜¯å› ä¸ºå·¦ç¯å²›å’Œå³ç¯å²›çš„åˆ‡è§’ä¸ä¸€æ ·,è¿™æ ·èƒ½å·§å¦™çš„è‡ªé€‚åº”ï¼Œåæ­£å°±æ˜¯åå‡ºå»çš„è§’å¤§äºç›®æ ‡åˆ‡è§’å°±ç»“æŸè¿™ä¸ªçŠ¶æ€
 		{
-				Imu_open_flag=0;//¹Ø±Õ½Ç¶È»ı·Ö
-				YAW.Yaw_1=0;//½Ç¶ÈÇå0
-				Running_status=S_NORMAL;	//Õı³£Ñ­¼£
+				Imu_open_flag=0;//å…³é—­è§’åº¦ç§¯åˆ†
+				YAW.Yaw_1=0;//è§’åº¦æ¸…0
+				Running_status=S_NORMAL;	//æ­£å¸¸å¾ªè¿¹
 		}
 		else if(HD_flag==0&&Imu_open_flag==0)
 		{
-				Running_status=S_NORMAL;	//Õı³£Ñ­¼£
+				Running_status=S_NORMAL;	//æ­£å¸¸å¾ªè¿¹
 		}
 
 		
 }
 
 
-void State_execution(void)//×´Ì¬Ö´ĞĞ
+void State_execution(void)//çŠ¶æ€æ‰§è¡Œ
 {
 	switch (Running_status)
   {
-  	case S_R_CIRC_PRE:  //×¼±¸ÈëÓÒ»·µº
+  	case S_R_CIRC_PRE:  //å‡†å¤‡å…¥å³ç¯å²›
 					Roundabout_Prepare();
   		break;
 		
-  	case S_R_CIRC_JIN:		//µ½´ïÓÒ»·µº×î¼Ñµã
+  	case S_R_CIRC_JIN:		//åˆ°è¾¾å³ç¯å²›æœ€ä½³ç‚¹
 					Ins_run();
   		break;
 		
-		case S_L_CIRC_PRE:  //×¼±¸Èë×ó»·µº
+		case S_L_CIRC_PRE:  //å‡†å¤‡å…¥å·¦ç¯å²›
 					Roundabout_Prepare();
 			break;
 		
-  	case S_L_CIRC_JIN:		//µ½´ï×ó»·µº×î¼Ñµã
+  	case S_L_CIRC_JIN:		//åˆ°è¾¾å·¦ç¯å²›æœ€ä½³ç‚¹
 					Ins_run();
   		break;
 		
-//		case S_L_CIRC_INTO:	//Ö´ĞĞ»·µº×ªÏò¶¯×÷
+//		case S_L_CIRC_INTO:	//æ‰§è¡Œç¯å²›è½¬å‘åŠ¨ä½œ
 //					Roundabout_inprogress();
 //			break;
 		
-		case S_NORMAL:			//ÆÕÍ¨Ñ­¼£
+		case S_NORMAL:			//æ™®é€šå¾ªè¿¹
 					Normal_run();
 			break;
 		

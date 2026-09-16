@@ -8,7 +8,7 @@ Angle_type    YAW;
 Angle_type    PITCH;
 
 
-int Imu_open_flag=0;//IMU»ı·Ö¿ªÆô±êÖ¾Î»
+int Imu_open_flag=0;//IMUç§¯åˆ†å¼€å¯æ ‡å¿—ä½
 
 void Imu_init(void)
 {
@@ -29,20 +29,20 @@ void Imu_value_get(void)
         Imu_angle_get();
     }
 		
-	//	  IMU_Data.gyro_x=((float)imu660rb_gyro_x)/ 14.3 ;//Ô­Ê¼ÖµÈ¥µôÁËÁãÆ®ÒÔºó³ıÒÔ×ª»¯ÏµÊı±ä³É½Ç¶ÈÖÆÎïÀíÊı¾İ
-  IMU_Data.gyro_x=((float)imu660ra_gyro_y)/ 16.4 ;//Ô­Ê¼ÖµÈ¥µôÁËÁãÆ®ÒÔºó³ıÒÔ×ª»¯ÏµÊı±ä³É½Ç¶ÈÖÆÎïÀíÊı¾İ
+	//	  IMU_Data.gyro_x=((float)imu660rb_gyro_x)/ 14.3 ;//åŸå§‹å€¼å»æ‰äº†é›¶é£˜ä»¥åé™¤ä»¥è½¬åŒ–ç³»æ•°å˜æˆè§’åº¦åˆ¶ç‰©ç†æ•°æ®
+  IMU_Data.gyro_x=((float)imu660ra_gyro_y)/ 16.4 ;//åŸå§‹å€¼å»æ‰äº†é›¶é£˜ä»¥åé™¤ä»¥è½¬åŒ–ç³»æ•°å˜æˆè§’åº¦åˆ¶ç‰©ç†æ•°æ®
 		
-		Imu_handle_x();//¸©Ñö½ÇÒ»Ö±ÔËĞĞ
+		Imu_handle_x();//ä¿¯ä»°è§’ä¸€ç›´è¿è¡Œ
 
 }
 
-void Imu_angle_get(void)//ÔË¶¯Çé¿öÏÂÖ´ĞĞ
+void Imu_angle_get(void)//è¿åŠ¨æƒ…å†µä¸‹æ‰§è¡Œ
 {
-//    IMU_Data.gyro_x=((float)imu660ra_gyro_x)/ 14.3 ;//Ô­Ê¼ÖµÈ¥µôÁËÁãÆ®ÒÔºó³ıÒÔ×ª»¯ÏµÊı±ä³É½Ç¶ÈÖÆÎïÀíÊı¾İ
+//    IMU_Data.gyro_x=((float)imu660ra_gyro_x)/ 14.3 ;//åŸå§‹å€¼å»æ‰äº†é›¶é£˜ä»¥åé™¤ä»¥è½¬åŒ–ç³»æ•°å˜æˆè§’åº¦åˆ¶ç‰©ç†æ•°æ®
     IMU_Data.gyro_y=((float)imu660ra_gyro_y)/ 16.3 ;
     IMU_Data.gyro_z=((float)imu660ra_gyro_z)/ 16.4 ;
 	
-//	  IMU_Data.gyro_x=((float)imu660rb_gyro_x)/ 14.3 ;//Ô­Ê¼ÖµÈ¥µôÁËÁãÆ®ÒÔºó³ıÒÔ×ª»¯ÏµÊı±ä³É½Ç¶ÈÖÆÎïÀíÊı¾İ
+//	  IMU_Data.gyro_x=((float)imu660rb_gyro_x)/ 14.3 ;//åŸå§‹å€¼å»æ‰äº†é›¶é£˜ä»¥åé™¤ä»¥è½¬åŒ–ç³»æ•°å˜æˆè§’åº¦åˆ¶ç‰©ç†æ•°æ®
 ////    IMU_Data.gyro_y=((float)imu660rb_gyro_y)/ 14.3 ;
 //    IMU_Data.gyro_z=((float)imu660rb_gyro_z)/ 14.3 ;
 
@@ -52,16 +52,16 @@ void Imu_angle_get(void)//ÔË¶¯Çé¿öÏÂÖ´ĞĞ
 
 
 
-void Imu_handle_0(void)//¾ø¶Ô½Ç¶È
+void Imu_handle_0(void)//ç»å¯¹è§’åº¦
 {
 
-    if(IMU_Data.gyro_z<0.4&&IMU_Data.gyro_z>-0.4)//ÂË²¨
+    if(IMU_Data.gyro_z<0.4&&IMU_Data.gyro_z>-0.4)//æ»¤æ³¢
        {
            YAW.Yaw_1-=0;
        }
     else
       {
-           YAW.Yaw_1-=(IMU_Data.gyro_z*0.005);//(»ı·Ö¹ı³Ì)±¾À´ÊÇÄæÊ±ÕëÎªÕı,ÏÖÔÚ¸ÄÎªË³Ê±ÕëÎªÕı
+           YAW.Yaw_1-=(IMU_Data.gyro_z*0.005);//(ç§¯åˆ†è¿‡ç¨‹)æœ¬æ¥æ˜¯é€†æ—¶é’ˆä¸ºæ­£,ç°åœ¨æ”¹ä¸ºé¡ºæ—¶é’ˆä¸ºæ­£
       }
 			
 }
@@ -69,25 +69,25 @@ void Imu_handle_0(void)//¾ø¶Ô½Ç¶È
 
 void Imu_handle_x(void)
 {
-				if(IMU_Data.gyro_x<1.1&&IMU_Data.gyro_x>-1.0)//ÂË²¨
+				if(IMU_Data.gyro_x<1.1&&IMU_Data.gyro_x>-1.0)//æ»¤æ³¢
 			 {
 					 PITCH.Pitch_1+=0;
 			 }
     else
       {
-           PITCH.Pitch_1+=(IMU_Data.gyro_x*0.005);//(»ı·Ö¹ı³Ì)±¾À´ÊÇÄæÊ±ÕëÎªÕı,ÏÖÔÚ¸ÄÎªË³Ê±ÕëÎªÕı
+           PITCH.Pitch_1+=(IMU_Data.gyro_x*0.005);//(ç§¯åˆ†è¿‡ç¨‹)æœ¬æ¥æ˜¯é€†æ—¶é’ˆä¸ºæ­£,ç°åœ¨æ”¹ä¸ºé¡ºæ—¶é’ˆä¸ºæ­£
       }
 }
 
 void Imu_handle_180(void)//[-180,180]
 {
-  if(IMU_Data.gyro_z<0.01&&IMU_Data.gyro_z>-0.01)//ÂË²¨
+  if(IMU_Data.gyro_z<0.01&&IMU_Data.gyro_z>-0.01)//æ»¤æ³¢
      {
          YAW.Yaw_2-=0;
      }
   else
     {
-         YAW.Yaw_2-=(IMU_Data.gyro_z*0.005);//(»ı·Ö¹ı³Ì)±¾À´ÊÇÄæÊ±ÕëÎªÕı,ÏÖÔÚ¸ÄÎªË³Ê±ÕëÎªÕı
+         YAW.Yaw_2-=(IMU_Data.gyro_z*0.005);//(ç§¯åˆ†è¿‡ç¨‹)æœ¬æ¥æ˜¯é€†æ—¶é’ˆä¸ºæ­£,ç°åœ¨æ”¹ä¸ºé¡ºæ—¶é’ˆä¸ºæ­£
 
         if(YAW.Yaw_2>180 && YAW.Yaw_2<=360)
           {
@@ -102,7 +102,7 @@ void Imu_handle_180(void)//[-180,180]
 
 void Imu_text(void)
 {
-    Imu_open_flag=1;//ÊÖ¶¯ÖÃ1
+    Imu_open_flag=1;//æ‰‹åŠ¨ç½®1
 
     ips114_show_string(8*0,16*0," YAW");           ips114_show_float(8*12,16*0, YAW.Yaw_1,5,6);
 	  ips114_show_string(8*0,16*1," PItch");           ips114_show_float(8*12,16*1,  PITCH.Pitch_1,5,6);

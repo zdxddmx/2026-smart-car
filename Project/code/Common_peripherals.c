@@ -1,7 +1,7 @@
 #include "zf_common_headfile.h"
 
 
-//----------------------------------------------------------------·äÃùÆ÷
+//----------------------------------------------------------------èœ‚é¸£å™¨
 
 void Buzzer_init(void)
 {
@@ -10,26 +10,26 @@ void Buzzer_init(void)
 
 void Buzzer_check(int TIME)
 {
-	gpio_set_level(Buzzer_pin,1);//Ïì
+	gpio_set_level(Buzzer_pin,1);//å“
 	system_delay_ms(TIME);
-	gpio_set_level(Buzzer_pin,0);//²»Ïì
+	gpio_set_level(Buzzer_pin,0);//ä¸å“
 }
 
 
 
-//----------------------------------------------------------------°´¼ü
+//----------------------------------------------------------------æŒ‰é”®
 
-uint8 key1_state=1;					//µ±Ç°°´¼ü×´Ì¬
+uint8 key1_state=1;					//å½“å‰æŒ‰é”®çŠ¶æ€
 uint8 key2_state=1;
 uint8 key3_state=1;
 uint8 key4_state=1;
 
-uint8 key1_last_state=0;		//ÉÏÒ»´Î°´¼ü×´Ì¬
+uint8 key1_last_state=0;		//ä¸Šä¸€æ¬¡æŒ‰é”®çŠ¶æ€
 uint8 key2_last_state=0;
 uint8 key3_last_state=0;
 uint8 key4_last_state=0;
 
-uint8 key1_flag;						//´¥·¢±êÖ¾Î»
+uint8 key1_flag;						//è§¦å‘æ ‡å¿—ä½
 uint8 key2_flag;
 uint8 key3_flag;
 uint8 key4_flag;
@@ -48,19 +48,19 @@ void Key_init(void)
 
 void Key_scan(void)
 {
-	  //±£´æ°´¼ü×´Ì¬
+	  //ä¿å­˜æŒ‰é”®çŠ¶æ€
     key1_last_state=key1_state;
     key2_last_state=key2_state;
     key3_last_state=key3_state;
     key4_last_state=key4_state;
 	
-	  //¼ì²âµ±Ç°°´¼ü×´Ì¬
+	  //æ£€æµ‹å½“å‰æŒ‰é”®çŠ¶æ€
     key1_state=gpio_get_level(KEY1);
     key2_state=gpio_get_level(KEY2);
     key3_state=gpio_get_level(KEY3);
     key4_state=gpio_get_level(KEY4);
 	
-		//±È½ÏÇ°ºóÁ½´Î°´¼ü×´Ì¬
+		//æ¯”è¾ƒå‰åä¸¤æ¬¡æŒ‰é”®çŠ¶æ€
 	  if(key1_state && !key1_last_state )   {key1_flag=1;}
     if(key2_state && !key2_last_state )   {key2_flag=1;}
     if(key3_state && !key3_last_state )   {key3_flag=1;}
@@ -69,7 +69,7 @@ void Key_scan(void)
 }
 
 
-//----------------------------------------------------------------ÂÖÇıDRV8701
+//----------------------------------------------------------------è½®é©±DRV8701
 
 void DRV8701_init(void)
 {
@@ -80,28 +80,28 @@ void DRV8701_init(void)
 		pwm_init(R_PWM,17000,0);
 }
 
-void DRV8701_D_motor_ctrl(int32 L_SPEED,int32 R_SPEED)//¿ª»·Çı¶¯º¯Êı
+void DRV8701_D_motor_ctrl(int32 L_SPEED,int32 R_SPEED)//å¼€ç¯é©±åŠ¨å‡½æ•°
 {
-	L_SPEED=L_SPEED>M_MAX?M_MAX:(L_SPEED<M_MIN)?M_MIN:L_SPEED;//×óÏŞ·ù
-	R_SPEED=R_SPEED>M_MAX?M_MAX:(R_SPEED<M_MIN)?M_MIN:R_SPEED;//ÓÒÏŞ·ù
+	L_SPEED=L_SPEED>M_MAX?M_MAX:(L_SPEED<M_MIN)?M_MIN:L_SPEED;//å·¦é™å¹…
+	R_SPEED=R_SPEED>M_MAX?M_MAX:(R_SPEED<M_MIN)?M_MIN:R_SPEED;//å³é™å¹…
 
-	if(L_SPEED>0)//Õı×ª
+	if(L_SPEED>0)//æ­£è½¬
 	{
 		gpio_set_level(L_DIR,1);
 		pwm_set_duty(L_PWM,L_SPEED);
 	}
-	else//·´×ª
+	else//åè½¬
 	{
 		gpio_set_level(L_DIR,0);
 		pwm_set_duty(L_PWM,-L_SPEED);
 	}
 
-	if(R_SPEED>0)//Õı×ª
+	if(R_SPEED>0)//æ­£è½¬
 	{
 		gpio_set_level(R_DIR,1);
 		pwm_set_duty(R_PWM,R_SPEED);
 	}
-	else//·´×ª
+	else//åè½¬
 	{
 		gpio_set_level(R_DIR,0);
 		pwm_set_duty(R_PWM,-R_SPEED);
@@ -109,7 +109,7 @@ void DRV8701_D_motor_ctrl(int32 L_SPEED,int32 R_SPEED)//¿ª»·Çı¶¯º¯Êı
 
 }
 
-//----------------------------------------------------------------¸ºÑ¹µç»ú
+//----------------------------------------------------------------è´Ÿå‹ç”µæœº
 //void FY_init(void)
 //{
 //		pwm_init(FY_pin,17000,0);
@@ -143,7 +143,7 @@ void DRV8701_D_motor_ctrl(int32 L_SPEED,int32 R_SPEED)//¿ª»·Çı¶¯º¯Êı
 
 
 
-//----------------------------------------------------------------ÎŞË¢¸ºÑ¹µç»ú
+//----------------------------------------------------------------æ— åˆ·è´Ÿå‹ç”µæœº
 
 void FY_init(void)
 {
@@ -156,22 +156,22 @@ void FY_init(void)
 
 
 
-// @brief   ÉèÖÃÎŞË¢µç»ú×ªËÙ£¨°Ù·Ö±È£©
-// @param   percent   ÓÍÃÅ 0~100£¨0=Í£×ª£¬100=ÂúËÙ£©£¬³¬³ö×Ô¶¯Ç¯µ½100
+// @brief   è®¾ç½®æ— åˆ·ç”µæœºè½¬é€Ÿï¼ˆç™¾åˆ†æ¯”ï¼‰
+// @param   percent   æ²¹é—¨ 0~100ï¼ˆ0=åœè½¬ï¼Œ100=æ»¡é€Ÿï¼‰ï¼Œè¶…å‡ºè‡ªåŠ¨é’³åˆ°100
 //-------------------------------------------------------------------------------------------------------------------
 void bldc_set_speed(uint8 percent)
 {
-    // ¼ÆËãÎŞË¢µçµ÷×ªËÙ   £¨1ms - 2ms£©/20ms * 10000£¨10000ÊÇPWMµÄÂúÕ¼¿Õ±ÈÊ±ºòµÄÖµ£©
-    // ÔÚ50HzµÄ¿ØÖÆÆµÂÊÏÂ£¬ÎŞË¢µçµ÷×ªËÙ 0%   Îª 500
-    // ÔÚ50HzµÄ¿ØÖÆÆµÂÊÏÂ£¬ÎŞË¢µçµ÷×ªËÙ 20%  Îª 600
-    // ÔÚ50HzµÄ¿ØÖÆÆµÂÊÏÂ£¬ÎŞË¢µçµ÷×ªËÙ 40%  Îª 700
-    // ÔÚ50HzµÄ¿ØÖÆÆµÂÊÏÂ£¬ÎŞË¢µçµ÷×ªËÙ 60%  Îª 800
-    // ÔÚ50HzµÄ¿ØÖÆÆµÂÊÏÂ£¬ÎŞË¢µçµ÷×ªËÙ 80%  Îª 900
-    // ÔÚ50HzµÄ¿ØÖÆÆµÂÊÏÂ£¬ÎŞË¢µçµ÷×ªËÙ 100% Îª 1000
+    // è®¡ç®—æ— åˆ·ç”µè°ƒè½¬é€Ÿ   ï¼ˆ1ms - 2msï¼‰/20ms * 10000ï¼ˆ10000æ˜¯PWMçš„æ»¡å ç©ºæ¯”æ—¶å€™çš„å€¼ï¼‰
+    // åœ¨50Hzçš„æ§åˆ¶é¢‘ç‡ä¸‹ï¼Œæ— åˆ·ç”µè°ƒè½¬é€Ÿ 0%   ä¸º 500
+    // åœ¨50Hzçš„æ§åˆ¶é¢‘ç‡ä¸‹ï¼Œæ— åˆ·ç”µè°ƒè½¬é€Ÿ 20%  ä¸º 600
+    // åœ¨50Hzçš„æ§åˆ¶é¢‘ç‡ä¸‹ï¼Œæ— åˆ·ç”µè°ƒè½¬é€Ÿ 40%  ä¸º 700
+    // åœ¨50Hzçš„æ§åˆ¶é¢‘ç‡ä¸‹ï¼Œæ— åˆ·ç”µè°ƒè½¬é€Ÿ 60%  ä¸º 800
+    // åœ¨50Hzçš„æ§åˆ¶é¢‘ç‡ä¸‹ï¼Œæ— åˆ·ç”µè°ƒè½¬é€Ÿ 80%  ä¸º 900
+    // åœ¨50Hzçš„æ§åˆ¶é¢‘ç‡ä¸‹ï¼Œæ— åˆ·ç”µè°ƒè½¬é€Ÿ 100% ä¸º 1000
 
     if (percent > 100)
     {
-        percent = 100;                                 // ¼òµ¥·À´ô
+        percent = 100;                                 // ç®€å•é˜²å‘†
     }
     pwm_set_duty(FY_pin, BLDC_DUTY_MIN + (uint16)percent * 5);   // 500 + percent*5
 }
@@ -188,7 +188,7 @@ void bldc_set_speed(uint8 percent)
 
 
 
-//----------------------------------------------------------------´ø·½Ïò±àÂëÆ÷-À¶É«
+//----------------------------------------------------------------å¸¦æ–¹å‘ç¼–ç å™¨-è“è‰²
 
 int16 LA_SPEED=0;
 int16 RA_SPEED=0;
@@ -197,14 +197,14 @@ int16 Distance=0;
 
 void Dir_encoder_init(void)
 {
-    encoder_dir_init(ENCODER_DIR_1, ENCODER_DIR_DIR_1, ENCODER_DIR_PULSE_1);   	// ³õÊ¼»¯±àÂëÆ÷Ä£¿éÓëÒı½Å ´ø·½ÏòÔöÁ¿±àÂëÆ÷Ä£Ê½
-    encoder_dir_init(ENCODER_DIR_2, ENCODER_DIR_DIR_2, ENCODER_DIR_PULSE_2);    // ³õÊ¼»¯±àÂëÆ÷Ä£¿éÓëÒı½Å ´ø·½ÏòÔöÁ¿±àÂëÆ÷Ä£Ê½
+    encoder_dir_init(ENCODER_DIR_1, ENCODER_DIR_DIR_1, ENCODER_DIR_PULSE_1);   	// åˆå§‹åŒ–ç¼–ç å™¨æ¨¡å—ä¸å¼•è„š å¸¦æ–¹å‘å¢é‡ç¼–ç å™¨æ¨¡å¼
+    encoder_dir_init(ENCODER_DIR_2, ENCODER_DIR_DIR_2, ENCODER_DIR_PULSE_2);    // åˆå§‹åŒ–ç¼–ç å™¨æ¨¡å—ä¸å¼•è„š å¸¦æ–¹å‘å¢é‡ç¼–ç å™¨æ¨¡å¼
 }
 
 void Dir_encoder_pulse_get(void)
 {
-    LA_SPEED = -encoder_get_count(ENCODER_DIR_1);                  // »ñÈ¡±àÂëÆ÷¼ÆÊı
-    RA_SPEED = encoder_get_count(ENCODER_DIR_2);              	// »ñÈ¡±àÂëÆ÷¼ÆÊı
+    LA_SPEED = -encoder_get_count(ENCODER_DIR_1);                  // è·å–ç¼–ç å™¨è®¡æ•°
+    RA_SPEED = encoder_get_count(ENCODER_DIR_2);              	// è·å–ç¼–ç å™¨è®¡æ•°
 	
 	  A_SPEED=(LA_SPEED+RA_SPEED)/2;
 	
@@ -213,12 +213,12 @@ void Dir_encoder_pulse_get(void)
 			 Distance+=A_SPEED;
 		}
 
-    encoder_clear_count(ENCODER_DIR_1);                                		// Çå¿Õ±àÂëÆ÷¼ÆÊı
-    encoder_clear_count(ENCODER_DIR_2);                             		// Çå¿Õ±àÂëÆ÷¼ÆÊı
+    encoder_clear_count(ENCODER_DIR_1);                                		// æ¸…ç©ºç¼–ç å™¨è®¡æ•°
+    encoder_clear_count(ENCODER_DIR_2);                             		// æ¸…ç©ºç¼–ç å™¨è®¡æ•°
 
 }
 
-void Encoder_text(void)//µç»ú²âÊÔ
+void Encoder_text(void)//ç”µæœºæµ‹è¯•
 {
 				
        static int16 L_SPEED=0,R_SPEED=0;
@@ -227,22 +227,22 @@ void Encoder_text(void)//µç»ú²âÊÔ
 
        Key_scan();
 
-          if(key1_flag)//×óµç»ú+500
+          if(key1_flag)//å·¦ç”µæœº+500
              {
                  key1_flag=0;
                  L_SPEED+=500;
              }
-          if(key2_flag)//×óµç»ú-500
+          if(key2_flag)//å·¦ç”µæœº-500
              {
                  key2_flag=0;
                  L_SPEED-=500;
              }
-          if(key3_flag)//ÓÒµç»ú+500
+          if(key3_flag)//å³ç”µæœº+500
              {
                  key3_flag=0;
                  R_SPEED+=500;
              }
-          if(key4_flag)//ÓÒµç»ú-500
+          if(key4_flag)//å³ç”µæœº-500
              {
                  key4_flag=0;
                  R_SPEED-=500;
@@ -259,13 +259,13 @@ void Encoder_text(void)//µç»ú²âÊÔ
 						 
 	        ips114_show_string(8*0,16*7, "DIS:");   		 ips114_show_int16(8*7,  16*7,Distance);					 
 						 
-//					printf("encoder_data_dir_1 counter %d .\r\n", LA_SPEED);     // Êä³ö±àÂëÆ÷¼ÆÊıĞÅÏ¢
-//					printf("encoder_data_dir_2 counter %d .\r\n", RA_SPEED);     // Êä³ö±àÂëÆ÷¼ÆÊıĞÅÏ¢
+//					printf("encoder_data_dir_1 counter %d .\r\n", LA_SPEED);     // è¾“å‡ºç¼–ç å™¨è®¡æ•°ä¿¡æ¯
+//					printf("encoder_data_dir_2 counter %d .\r\n", RA_SPEED);     // è¾“å‡ºç¼–ç å™¨è®¡æ•°ä¿¡æ¯
 
           DRV8701_D_motor_ctrl(L_SPEED,R_SPEED);
 }
 
-//----------------------------------------------------------------Ò£¿Ø
+//----------------------------------------------------------------é¥æ§
 void Ctrl_init(void)
 {
 	gpio_init(IO_P77, GPI, 0, GPI_PULL_UP);

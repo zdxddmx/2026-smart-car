@@ -1,7 +1,7 @@
 #include "zf_common_headfile.h"
 
 
-int32 base_speed = 0;//1500Õ¼¿Õ±È
+int32 base_speed = 0;//1500å ç©ºæ¯”
 
 float place_error = 0;
 float place_last_error = 0;
@@ -11,16 +11,16 @@ float place_kp = 17;  //-10  -20 10  5
 float place_kd =14;   //10  20  25  35  45  60
 float place_gyro_kd = 0.2;  //40  -15  -35  -50  -60
 //0.3
-void place_pid(int16 error)//·½ÏòÍâ»·¼ÆËãpid£¬º¯ÊıÊäÈëÎªĞ¡³µÑ­¼£µÄ·´À¡Îó²î
+void place_pid(int16 error)//æ–¹å‘å¤–ç¯è®¡ç®—pidï¼Œå‡½æ•°è¾“å…¥ä¸ºå°è½¦å¾ªè¿¹çš„åé¦ˆè¯¯å·®
 {
-    float A= 0.9;//µÍÍ¨ÂË²¨ÏµÊı,Ò»°ã¿ÉÒÔÎª0.9 or 0.8
-    place_last_out = place_out;//¸üĞÂÉÏÒ»´ÎÖµ
-    place_last_error = place_error; //¸üĞÂÉÏÒ»´ÎÖµ
+    float A= 0.9;//ä½é€šæ»¤æ³¢ç³»æ•°,ä¸€èˆ¬å¯ä»¥ä¸º0.9 or 0.8
+    place_last_out = place_out;//æ›´æ–°ä¸Šä¸€æ¬¡å€¼
+    place_last_error = place_error; //æ›´æ–°ä¸Šä¸€æ¬¡å€¼
     place_error = error;
-//    place_out = place_kp * place_error + place_kd * (place_error - place_last_error) + place_gyro_kd * imu660rb_gyro_z;//×îºó¼ÓÉÏ½ÇËÙ¶Èkd Óë ÂË²¨ºóµÄZÖá½ÇËÙ¶È »òÕß Ô­Ê¼Öµ£¨²»ÍÆ¼ö£¬ÔëÒô±È½Ï´ó£© µÄ³Ë»ı
-	place_out = place_kp * place_error + place_kd * (place_error - place_last_error) + place_gyro_kd * imu660ra_gyro_z;//×îºó¼ÓÉÏ½ÇËÙ¶Èkd Óë ÂË²¨ºóµÄZÖá½ÇËÙ¶È »òÕß Ô­Ê¼Öµ£¨²»ÍÆ¼ö£¬ÔëÒô±È½Ï´ó£© µÄ³Ë»ı
+//    place_out = place_kp * place_error + place_kd * (place_error - place_last_error) + place_gyro_kd * imu660rb_gyro_z;//æœ€ååŠ ä¸Šè§’é€Ÿåº¦kd ä¸ æ»¤æ³¢åçš„Zè½´è§’é€Ÿåº¦ æˆ–è€… åŸå§‹å€¼ï¼ˆä¸æ¨èï¼Œå™ªéŸ³æ¯”è¾ƒå¤§ï¼‰ çš„ä¹˜ç§¯
+	place_out = place_kp * place_error + place_kd * (place_error - place_last_error) + place_gyro_kd * imu660ra_gyro_z;//æœ€ååŠ ä¸Šè§’é€Ÿåº¦kd ä¸ æ»¤æ³¢åçš„Zè½´è§’é€Ÿåº¦ æˆ–è€… åŸå§‹å€¼ï¼ˆä¸æ¨èï¼Œå™ªéŸ³æ¯”è¾ƒå¤§ï¼‰ çš„ä¹˜ç§¯
 
-//	    place_out = place_kp * place_error + place_kd * (place_error - place_last_error) ;//×îºó¼ÓÉÏ½ÇËÙ¶Èkd Óë ÂË²¨ºóµÄZÖá½ÇËÙ¶È »òÕß Ô­Ê¼Öµ£¨²»ÍÆ¼ö£¬ÔëÒô±È½Ï´ó£© µÄ³Ë»ı
+//	    place_out = place_kp * place_error + place_kd * (place_error - place_last_error) ;//æœ€ååŠ ä¸Šè§’é€Ÿåº¦kd ä¸ æ»¤æ³¢åçš„Zè½´è§’é€Ÿåº¦ æˆ–è€… åŸå§‹å€¼ï¼ˆä¸æ¨èï¼Œå™ªéŸ³æ¯”è¾ƒå¤§ï¼‰ çš„ä¹˜ç§¯
 
     place_out = place_out * A + place_last_out * (1-A);
 }
@@ -36,13 +36,13 @@ float l_speed_ki = 2;
 float l_speed_kp = 1;
 void l_speed_pid(float aim_speed,float now_speed)
 {
-    float A = 0.9;//µÍÍ¨ÂË²¨ÏµÊı,Ò»°ã¿ÉÒÔÎª0.9 or 0.8
-    aim_speed = base_speed - place_out;//´®ÉÏ·½ÏòÍâ»·µÄÊä³öÖµ£¬ÊµÏÖ¸Ä±äÆÚÍûËÙ¶È£¬¸ù¾İÊµ¼Ê×ªÏòµ÷Õû·ûºÅ
-    l_speed_last_out = l_speed_out;//¸üĞÂÉÏÒ»´ÎÖµ
-    l_speed_last_error = l_speed_error; //¸üĞÂÉÏÒ»´ÎÖµ
+    float A = 0.9;//ä½é€šæ»¤æ³¢ç³»æ•°,ä¸€èˆ¬å¯ä»¥ä¸º0.9 or 0.8
+    aim_speed = base_speed - place_out;//ä¸²ä¸Šæ–¹å‘å¤–ç¯çš„è¾“å‡ºå€¼ï¼Œå®ç°æ”¹å˜æœŸæœ›é€Ÿåº¦ï¼Œæ ¹æ®å®é™…è½¬å‘è°ƒæ•´ç¬¦å·
+    l_speed_last_out = l_speed_out;//æ›´æ–°ä¸Šä¸€æ¬¡å€¼
+    l_speed_last_error = l_speed_error; //æ›´æ–°ä¸Šä¸€æ¬¡å€¼
     l_speed_error = aim_speed - now_speed;
     l_speed_out += l_speed_ki * l_speed_error + l_speed_kp * (l_speed_error - l_speed_last_error);
-    l_speed_out = l_speed_out * A + l_speed_last_out * (1-A);//×îºó¼ÆËã³öËÙ¶È»·pwmÊä³ö£¬Ö±½Ó¸øµç»ú¿ØÖÆº¯Êı
+    l_speed_out = l_speed_out * A + l_speed_last_out * (1-A);//æœ€åè®¡ç®—å‡ºé€Ÿåº¦ç¯pwmè¾“å‡ºï¼Œç›´æ¥ç»™ç”µæœºæ§åˆ¶å‡½æ•°
 }
 
 //float base_r_speed = 0;
@@ -54,25 +54,25 @@ float r_speed_ki = 2;
 float r_speed_kp = 1;
 void r_speed_pid(float aim_speed,float now_speed)
 {
-    float A = 0.9;//µÍÍ¨ÂË²¨ÏµÊı,Ò»°ã¿ÉÒÔÎª0.9 or 0.8
-    aim_speed = base_speed + place_out;//´®ÉÏ·½ÏòÍâ»·µÄÊä³öÖµ£¬ÊµÏÖ¸Ä±äÆÚÍûËÙ¶È£¬¸ù¾İÊµ¼Ê×ªÏòµ÷Õû·ûºÅ
-    r_speed_last_out = r_speed_out;//¸üĞÂÉÏÒ»´ÎÖµ
-    r_speed_last_error = r_speed_error;  //¸üĞÂÉÏÒ»´ÎÖµ
+    float A = 0.9;//ä½é€šæ»¤æ³¢ç³»æ•°,ä¸€èˆ¬å¯ä»¥ä¸º0.9 or 0.8
+    aim_speed = base_speed + place_out;//ä¸²ä¸Šæ–¹å‘å¤–ç¯çš„è¾“å‡ºå€¼ï¼Œå®ç°æ”¹å˜æœŸæœ›é€Ÿåº¦ï¼Œæ ¹æ®å®é™…è½¬å‘è°ƒæ•´ç¬¦å·
+    r_speed_last_out = r_speed_out;//æ›´æ–°ä¸Šä¸€æ¬¡å€¼
+    r_speed_last_error = r_speed_error;  //æ›´æ–°ä¸Šä¸€æ¬¡å€¼
     r_speed_error = aim_speed - now_speed;
     r_speed_out += r_speed_ki * r_speed_error + r_speed_kp * (r_speed_error - r_speed_last_error);
-    r_speed_out = r_speed_out * A + r_speed_last_out * (1-A);//×îºó¼ÆËã³öËÙ¶È»·pwmÊä³ö£¬Ö±½Ó¸øµç»ú¿ØÖÆº¯Êı
+    r_speed_out = r_speed_out * A + r_speed_last_out * (1-A);//æœ€åè®¡ç®—å‡ºé€Ÿåº¦ç¯pwmè¾“å‡ºï¼Œç›´æ¥ç»™ç”µæœºæ§åˆ¶å‡½æ•°
 }
 
 
 
 /**
- * @brief  Ò»½×µÍÍ¨ÂË²¨Æ÷£¨ÔöÁ¿Ê½£¬´¿º¯Êı£©
- * @param  current  µ±Ç°²ÉÑùÖµ
- * @param  last     ÉÏÒ»´ÎÂË²¨Êä³öÖµ
- * @param  alpha    ÂË²¨ÏµÊı [0, 1]£¬Ô½Ğ¡Ô½Æ½»¬£¬Ô½´óÏìÓ¦Ô½¿ì
- * @return          ±¾´ÎÂË²¨Êä³öÖµ
- * @note   Ê×´ÎÊ¹ÓÃÊ±£¬last Ó¦Óë current ÏàÍ¬ÒÔÍê³É³õÊ¼»¯
- *         Ê¾Àı£ºfiltered = LowPassFilter(raw, filtered, 0.2f);
+ * @brief  ä¸€é˜¶ä½é€šæ»¤æ³¢å™¨ï¼ˆå¢é‡å¼ï¼Œçº¯å‡½æ•°ï¼‰
+ * @param  current  å½“å‰é‡‡æ ·å€¼
+ * @param  last     ä¸Šä¸€æ¬¡æ»¤æ³¢è¾“å‡ºå€¼
+ * @param  alpha    æ»¤æ³¢ç³»æ•° [0, 1]ï¼Œè¶Šå°è¶Šå¹³æ»‘ï¼Œè¶Šå¤§å“åº”è¶Šå¿«
+ * @return          æœ¬æ¬¡æ»¤æ³¢è¾“å‡ºå€¼
+ * @note   é¦–æ¬¡ä½¿ç”¨æ—¶ï¼Œlast åº”ä¸ current ç›¸åŒä»¥å®Œæˆåˆå§‹åŒ–
+ *         ç¤ºä¾‹ï¼šfiltered = LowPassFilter(raw, filtered, 0.2f);
  */
 float LowPassFilter(float current, float last, float alpha)
 {

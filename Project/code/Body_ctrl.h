@@ -3,16 +3,16 @@ extern int HD_flag;
 
 
 typedef enum {
-    S_NORMAL,           // Õý³£Ñ­¼£
-    S_OFF_TRACK,        // ¶ªÏßÍ£³µ
-    S_R_CIRC_PRE,         // ÓÒ»·µº¡¤Ô¤ÅÐ
-    S_R_CIRC_JIN,         // ÓÒ»·µº¡¤½øÈë
-    S_R_CIRC_INTO,        // ÓÒ»·µº¡¤Ê»Èë
-    S_R_CIRC_CHU,         // ÓÒ»·µº¡¤Ê»³ö
-	  S_L_CIRC_PRE,         // ×ó»·µº¡¤Ô¤ÅÐ
-    S_L_CIRC_JIN,         // ×ó»·µº¡¤½øÈë
-    S_L_CIRC_INTO,        // ×ó»·µº¡¤Ê»Èë
-    S_L_CIRC_CHU,         // ×ó»·µº¡¤Ê»³ö
+    S_NORMAL,           // æ­£å¸¸å¾ªè¿¹
+    S_OFF_TRACK,        // ä¸¢çº¿åœè½¦
+    S_R_CIRC_PRE,         // å³çŽ¯å²›Â·é¢„åˆ¤
+    S_R_CIRC_JIN,         // å³çŽ¯å²›Â·è¿›å…¥
+    S_R_CIRC_INTO,        // å³çŽ¯å²›Â·é©¶å…¥
+    S_R_CIRC_CHU,         // å³çŽ¯å²›Â·é©¶å‡º
+	  S_L_CIRC_PRE,         // å·¦çŽ¯å²›Â·é¢„åˆ¤
+    S_L_CIRC_JIN,         // å·¦çŽ¯å²›Â·è¿›å…¥
+    S_L_CIRC_INTO,        // å·¦çŽ¯å²›Â·é©¶å…¥
+    S_L_CIRC_CHU,         // å·¦çŽ¯å²›Â·é©¶å‡º
 } state_t;
 
 

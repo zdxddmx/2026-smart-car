@@ -1,14 +1,14 @@
 #include "zf_common_headfile.h"
 
-int16   adc_date[4];                                //´¢´æÄ£ÄâÁ¿²É¼¯Öµ
-int16 	L_H=0,L_S=0,R_S=0,R_H=0;										//¶¨Òå´«¸ĞÆ÷µ¥Î»Ãû³Æ
-int16   ALL_DG=0;                                   //µç¸Ğ×ÜÖµ
+int16   adc_date[4];                                //å‚¨å­˜æ¨¡æ‹Ÿé‡é‡‡é›†å€¼
+int16 	L_H=0,L_S=0,R_S=0,R_H=0;										//å®šä¹‰ä¼ æ„Ÿå™¨å•ä½åç§°
+int16   ALL_DG=0;                                   //ç”µæ„Ÿæ€»å€¼
 int16 	L_ALL=0;
 int16 	R_ALL=0;
-int16   adc_min[4]={40,80,80,35};              		 //×îĞ¡Öµ  (¸ø¶¨Ò»¸öĞèÒª)
-int16   adc_max[4]={580, 580, 550, 570};       			//×î´óÖµ
+int16   adc_min[4]={40,80,80,35};              		 //æœ€å°å€¼  (ç»™å®šä¸€ä¸ªéœ€è¦)
+int16   adc_max[4]={580, 580, 550, 570};       			//æœ€å¤§å€¼
 
-int16   Track_error=0;															//×îÖÕµÄÈüµÀÏà¶ÔÆ«²î
+int16   Track_error=0;															//æœ€ç»ˆçš„èµ›é“ç›¸å¯¹åå·®
 
 void adv_init(void)
 {
@@ -18,7 +18,7 @@ void adv_init(void)
 	 adc_init(ADC_CH14_P06, ADC_10BIT);
 }
 
-void AD_Fitier(void)//ÂË²¨
+void AD_Fitier(void)//æ»¤æ³¢
 {
 	int16 i;
 
@@ -28,7 +28,7 @@ void AD_Fitier(void)//ÂË²¨
   int16 filter_buf_RS [FILTER_N];  
   int16 filter_buf_RH [FILTER_N];  
 
-	//²É¼¯Öµ
+	//é‡‡é›†å€¼
 	for(i=0;i<FILTER_N;i++)
 	{
 		filter_buf_LH[i]= adc_mean_filter_convert(ADC_CH8_P00,10);
@@ -38,7 +38,7 @@ void AD_Fitier(void)//ÂË²¨
     filter_buf_RH[i] =adc_mean_filter_convert(ADC_CH14_P06,10);
 	}
 
-//È¥³ı¼«ÖµÇóÆ½¾ù
+//å»é™¤æå€¼æ±‚å¹³å‡
 		adc_date[0] = I_Median_Average_Filter(filter_buf_LH,4);
 		adc_date[1] = I_Median_Average_Filter(filter_buf_LS,4);
 
@@ -49,7 +49,7 @@ void AD_Fitier(void)//ÂË²¨
 
 void Read_adc(void)
 {
-			AD_Fitier();//ÂË²¨
+			AD_Fitier();//æ»¤æ³¢
 	
 	    L_H=Adc_Normalize(adc_date[0],adc_min[0],adc_max[0]);
 			L_S=Adc_Normalize(adc_date[1],adc_min[1],adc_max[1]);
@@ -62,7 +62,7 @@ void Read_adc(void)
 			R_ALL=R_H+R_S;
 			ALL_DG=L_ALL+R_ALL;
 
-	    Track_error=Deviation_Calculate(L_H,L_S,R_S,R_H);//½«ËÄÂ·µç¸Ğ·Ö³É×óÓÒÈ»ºó¸ùºÅ²î±ÈºÍ¼ÆËãÈüµÀÎó²î
+	    Track_error=Deviation_Calculate(L_H,L_S,R_S,R_H);//å°†å››è·¯ç”µæ„Ÿåˆ†æˆå·¦å³ç„¶åæ ¹å·å·®æ¯”å’Œè®¡ç®—èµ›é“è¯¯å·®
 
 }
 
@@ -72,14 +72,14 @@ void Read_adc(void)
 //{ 
 //    int16 result;
 //    
-//    // ±ß½ç±£»¤£¨·ÀÖ¹¸ºÖµºÍ³¬³ö·¶Î§£©
+//    // è¾¹ç•Œä¿æŠ¤ï¼ˆé˜²æ­¢è´Ÿå€¼å’Œè¶…å‡ºèŒƒå›´ï¼‰
 //    if (value <= min) return 1;
 //    if (value >= max) return 100;
 //    
-//    // ¼ÆËã¹éÒ»»¯Öµ
+//    // è®¡ç®—å½’ä¸€åŒ–å€¼
 //    result = 1 + (value - min) * 99 / (max - min);
 //    
-//    // ¶ş´Î±£ÏÕ£¨·ÀÖ¹ÕûÊıÔËËãÒì³££©
+//    // äºŒæ¬¡ä¿é™©ï¼ˆé˜²æ­¢æ•´æ•°è¿ç®—å¼‚å¸¸ï¼‰
 //    if (result < 1) return 1;
 //    if (result > 100) return 100;
 //    
@@ -87,10 +87,10 @@ void Read_adc(void)
 //}
  
  /** 
- * @brief ¹éÒ»»¯º¯Êı£¬½«ÊäÈëÖµÓ³Éäµ½1-100·¶Î§ 
+ * @brief å½’ä¸€åŒ–å‡½æ•°ï¼Œå°†è¾“å…¥å€¼æ˜ å°„åˆ°1-100èŒƒå›´ 
  *  
- * @param value ÊäÈë³õÊ¼µç¸ĞÖµ£¨´ËÊ±ÎªÕûĞÍ£© 
- * @return float ¹éÒ»»¯ºóµÄÖµ£¨1-100£© 
+ * @param value è¾“å…¥åˆå§‹ç”µæ„Ÿå€¼ï¼ˆæ­¤æ—¶ä¸ºæ•´å‹ï¼‰ 
+ * @return float å½’ä¸€åŒ–åçš„å€¼ï¼ˆ1-100ï¼‰ 
  */ 
  
  
@@ -98,9 +98,9 @@ float Adc_Normalize(int value, float min, float max)
 { 
     float normalized = 0; 
      
-    normalized = (float)(value - min) / (max - min) * 100.0f;  // ¼ÆËã¹éÒ»»¯Öµ 
+    normalized = (float)(value - min) / (max - min) * 100.0f;  // è®¡ç®—å½’ä¸€åŒ–å€¼ 
      
-    // ÏŞ·ù±£»¤£¬È·±£·µ»ØÖµÔÚ1-100·¶Î§ÄÚ 
+    // é™å¹…ä¿æŠ¤ï¼Œç¡®ä¿è¿”å›å€¼åœ¨1-100èŒƒå›´å†… 
     return normalized >= 100.0 ? 100.0 : (normalized < 1.0 ? 1.0 : normalized); 
 }
 
@@ -108,34 +108,34 @@ float Adc_Normalize(int value, float min, float max)
 
 
 /** 
-* ÖĞÎ»ÖµÆ½¾ùÂË²¨º¯Êı 
-* @param arr ÊäÈëÊı¾İÊı×é 
-* @param times Êı¾İ²ÉÑù´ÎÊı 
-* @return ÂË²¨ºóµÄÆ½¾ùÖµ 
+* ä¸­ä½å€¼å¹³å‡æ»¤æ³¢å‡½æ•° 
+* @param arr è¾“å…¥æ•°æ®æ•°ç»„ 
+* @param times æ•°æ®é‡‡æ ·æ¬¡æ•° 
+* @return æ»¤æ³¢åçš„å¹³å‡å€¼ 
 */ 
 int I_Median_Average_Filter(int* arr, int times) 
 { 
 		int min = arr[0], max = arr[0], sum = 0; 
 		int i = 0; 
 
-		// ±éÀúÊı×é£¬ÕÒ³ö×î´óÖµ¡¢×îĞ¡Öµ²¢ÇóºÍ 
+		// éå†æ•°ç»„ï¼Œæ‰¾å‡ºæœ€å¤§å€¼ã€æœ€å°å€¼å¹¶æ±‚å’Œ 
 		for (i = 0; i < times; i++) 
 		{ 
 		if (arr[i] < min) min = arr[i]; 
 		if (arr[i] > max) max = arr[i]; 
 		sum += arr[i]; 
 		} 
-// ¼ÆËãÈ¥µô×î´óÖµºÍ×îĞ¡ÖµºóµÄÆ½¾ùÖµ 
+// è®¡ç®—å»æ‰æœ€å¤§å€¼å’Œæœ€å°å€¼åçš„å¹³å‡å€¼ 
 return (sum - min - max) / (times - 2); 
 }
 
 
 int16 Deviation_Calculate(int16 l, int16 ls, int16 rs, int16 r)
 {
-    #define A   1   // Ö±ÏßÑ­¼£ÏìÓ¦
-    #define B   1   // ÍäµÀÄÚÇĞÇ¿¶È
-    #define C   1   // ÍäµÀÇúÂÊ²¹³¥
-    #define P   100 // Êä³öÔöÒæ
+    #define A   1   // ç›´çº¿å¾ªè¿¹å“åº”
+    #define B   1   // å¼¯é“å†…åˆ‡å¼ºåº¦
+    #define C   1   // å¼¯é“æ›²ç‡è¡¥å¿
+    #define P   100 // è¾“å‡ºå¢ç›Š
     
     int32 sub = A * (l - r) + B * (ls - rs);
     int32 add = A * (l + r) + C * abs(ls - rs) + 1;

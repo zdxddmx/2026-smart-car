@@ -1,20 +1,20 @@
 
 
-//½á¹¹ÌåÉùÃ÷
+//ç»“æ„ä½“å£°æ˜
 typedef struct{
-    float Xdata;   //ÁãÆ®²ÎÊıX
-    float Ydata;   //ÁãÆ®²ÎÊıY
-    float Zdata;   //ÁãÆ®²ÎÊıZ
+    float Xdata;   //é›¶é£˜å‚æ•°X
+    float Ydata;   //é›¶é£˜å‚æ•°Y
+    float Zdata;   //é›¶é£˜å‚æ•°Z
 }gyro_param_t ;
 
 typedef struct{
-    float acc_x;   //xÖá¼ÓËÙ¶È
-    float acc_y;   //yÖá¼ÓËÙ¶È
-    float acc_z;   //zÖá¼ÓËÙ¶È
+    float acc_x;   //xè½´åŠ é€Ÿåº¦
+    float acc_y;   //yè½´åŠ é€Ÿåº¦
+    float acc_z;   //zè½´åŠ é€Ÿåº¦
 
-    float gyro_x;  //xÖá½ÇËÙ¶È
-    float gyro_y;  //yÖá½ÇËÙ¶È
-    float gyro_z;  //zÖá½ÇËÙ¶È
+    float gyro_x;  //xè½´è§’é€Ÿåº¦
+    float gyro_y;  //yè½´è§’é€Ÿåº¦
+    float gyro_z;  //zè½´è§’é€Ÿåº¦
 }IMU_param_t ;
 
 typedef struct{

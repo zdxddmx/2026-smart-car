@@ -26,7 +26,7 @@
 
 
 
-//----------------------------------------------------------------ÎÞË¢¸ºÑ¹µç»ú
+//----------------------------------------------------------------æ— åˆ·è´ŸåŽ‹ç”µæœº
 
 
 
@@ -35,9 +35,9 @@
 
 
 
-// 50HzÏÂ£º0% ¡ú duty 500£¨Í£×ª£©£¬100% ¡ú duty 1000£¨ÂúËÙ£©
-#define BLDC_DUTY_MIN      (500)           // 0%   ¶ÔÓ¦Õ¼¿Õ±È
-#define BLDC_DUTY_MAX      (1000)          // 100% ¶ÔÓ¦Õ¼¿Õ±È
+// 50Hzä¸‹ï¼š0% â†’ duty 500ï¼ˆåœè½¬ï¼‰ï¼Œ100% â†’ duty 1000ï¼ˆæ»¡é€Ÿï¼‰
+#define BLDC_DUTY_MIN      (500)           // 0%   å¯¹åº”å ç©ºæ¯”
+#define BLDC_DUTY_MAX      (1000)          // 100% å¯¹åº”å ç©ºæ¯”
 
 
 
@@ -46,13 +46,13 @@
 
 
 
-#define ENCODER_DIR_1                 	(TIM0_ENCOEDER)                         // Õý½»±àÂëÆ÷¶ÔÓ¦Ê¹ÓÃµÄ±àÂëÆ÷½Ó¿Ú ÕâÀïÊ¹ÓÃQTIMER1µÄENCOEDER1
-#define ENCODER_DIR_DIR_1              	(IO_P35)            				 	// DIR ¶ÔÓ¦µÄÒý½Å
-#define ENCODER_DIR_PULSE_1            	(TIM0_ENCOEDER_P34)            			// PULSE ¶ÔÓ¦µÄÒý½Å
+#define ENCODER_DIR_1                 	(TIM0_ENCOEDER)                         // æ­£äº¤ç¼–ç å™¨å¯¹åº”ä½¿ç”¨çš„ç¼–ç å™¨æŽ¥å£ è¿™é‡Œä½¿ç”¨QTIMER1çš„ENCOEDER1
+#define ENCODER_DIR_DIR_1              	(IO_P35)            				 	// DIR å¯¹åº”çš„å¼•è„š
+#define ENCODER_DIR_PULSE_1            	(TIM0_ENCOEDER_P34)            			// PULSE å¯¹åº”çš„å¼•è„š
 
-#define ENCODER_DIR_2                 	(TIM3_ENCOEDER)                         // ´ø·½Ïò±àÂëÆ÷¶ÔÓ¦Ê¹ÓÃµÄ±àÂëÆ÷½Ó¿Ú ÕâÀïÊ¹ÓÃQTIMER1µÄENCOEDER2
-#define ENCODER_DIR_DIR_2           		(IO_P53)             					// DIR ¶ÔÓ¦µÄÒý½Å
-#define ENCODER_DIR_PULSE_2       			(TIM3_ENCOEDER_P04)            			// PULSE ¶ÔÓ¦µÄÒý½Å
+#define ENCODER_DIR_2                 	(TIM3_ENCOEDER)                         // å¸¦æ–¹å‘ç¼–ç å™¨å¯¹åº”ä½¿ç”¨çš„ç¼–ç å™¨æŽ¥å£ è¿™é‡Œä½¿ç”¨QTIMER1çš„ENCOEDER2
+#define ENCODER_DIR_DIR_2           		(IO_P53)             					// DIR å¯¹åº”çš„å¼•è„š
+#define ENCODER_DIR_PULSE_2       			(TIM3_ENCOEDER_P04)            			// PULSE å¯¹åº”çš„å¼•è„š
 
 
 extern uint8 key1_flag;					

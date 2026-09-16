@@ -1,8 +1,8 @@
-#define FILTER_N    4                                                  //ÂË²¨Éî¶È
+#define FILTER_N    4                                                  //æ»¤æ³¢æ·±åº¦
 
 
 extern int16   Track_error;
-extern int16   ALL_DG;                                   //µç¸Ð×ÜÖµ
+extern int16   ALL_DG;                                   //ç”µæ„Ÿæ€»å€¼
 extern int16 	 L_ALL;
 extern int16 	 R_ALL;
 
